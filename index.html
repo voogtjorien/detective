@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<!-- saved from url=(0052)file:///Users/jorienvoogt/Downloads/detective_6.html -->
-<html lang="nl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>De Sekte — Notities</title>
-<link href="./De Sekte — Notities_files/css2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -15,7 +16,7 @@
   --paper-dark: #c4a860;
   --kraft-light: #e8d4a8;
 }
-body { background: #0e0a04; font-family: 'Special Elite', monospace; color: var(--ink); min-height: 100vh; }
+body { background: #0e0a04; font-family: 'Inter', sans-serif; color: var(--ink); min-height: 100vh; }
 
 /* ══ TV VIEW ══ */
 #tv-view {
@@ -54,11 +55,7 @@ body { background: #0e0a04; font-family: 'Special Elite', monospace; color: var(
   background-image: repeating-linear-gradient(transparent, transparent 20px, rgba(160,120,60,0.22) 20px, rgba(160,120,60,0.22) 21px);
   pointer-events: none;
 }
-.card::after {
-  content: ''; position: absolute;
-  top: 0; left: 32px; bottom: 0; width: 1px;
-  background: rgba(180,80,80,0.28); pointer-events: none;
-}
+
 
 .card-top {
   display: flex; align-items: center; justify-content: space-between;
@@ -80,15 +77,15 @@ body { background: #0e0a04; font-family: 'Special Elite', monospace; color: var(
 .tv-cat-label {
   font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--stamp-red); opacity: 0.75; margin-bottom: 1px;
-  font-family: 'Special Elite', monospace;
+  font-family: 'Inter', sans-serif;
 }
 .tv-note {
-  font-family: 'Caveat', cursive;
+  font-family: 'Inter', sans-serif; font-weight: 700;
   font-size: 12px; color: var(--ink); line-height: 1.3;
   padding-left: 8px;
 }
 .tv-note::before { content: '— '; color: var(--ink-faded); font-size: 10px; }
-.tv-empty { font-family: 'Caveat', cursive; font-size: 11px; color: rgba(90,69,48,0.35); font-style: italic; }
+.tv-empty { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 11px; color: rgba(90,69,48,0.35); ; }
 
 /* ══ MOBILE VIEW ══ */
 #mobile-view { display: none; min-height: 100vh; background: #0e0a04; padding: 28px 16px 50px; }
@@ -115,7 +112,7 @@ body { background: #0e0a04; font-family: 'Special Elite', monospace; color: var(
 #player-sheet { display: none; }
 .back-btn {
   background: none; border: none;
-  font-family: 'Special Elite', monospace; font-size: 11px;
+  font-family: 'Inter', sans-serif; font-size: 11px;
   color: #4a3a28; letter-spacing: 0.15em; text-transform: uppercase;
   cursor: pointer; margin-bottom: 16px; display: block;
 }
@@ -130,11 +127,7 @@ body { background: #0e0a04; font-family: 'Special Elite', monospace; color: var(
   background-image: repeating-linear-gradient(transparent, transparent 26px, rgba(160,120,60,0.22) 26px, rgba(160,120,60,0.22) 27px);
   pointer-events: none;
 }
-.sheet-paper::after {
-  content: ''; position: absolute;
-  top: 0; left: 40px; bottom: 0; width: 1px;
-  background: rgba(180,80,80,0.28); pointer-events: none;
-}
+
 
 .sheet-header {
   padding: 14px 14px 10px;
@@ -154,7 +147,7 @@ body { background: #0e0a04; font-family: 'Special Elite', monospace; color: var(
 
 .tab-btn {
   background: none; border: none; border-bottom: 2px solid transparent;
-  font-family: 'Special Elite', monospace; font-size: 11px;
+  font-family: 'Inter', sans-serif; font-size: 11px;
   color: var(--ink-faded); letter-spacing: 0.1em; text-transform: uppercase;
   padding: 8px 10px; cursor: pointer; white-space: nowrap; flex-shrink: 0;
 }
@@ -171,14 +164,14 @@ body { background: #0e0a04; font-family: 'Special Elite', monospace; color: var(
 .cat-input {
   flex: 1; background: transparent; border: none;
   border-bottom: 1px solid rgba(100,70,30,0.4);
-  font-family: 'Special Elite', monospace; font-size: 13px;
+  font-family: 'Inter', sans-serif; font-size: 13px;
   color: var(--ink); padding: 3px 0; outline: none;
   letter-spacing: 0.06em;
 }
-.cat-input::placeholder { color: rgba(90,69,48,0.4); font-style: italic; }
+.cat-input::placeholder { color: rgba(90,69,48,0.4); ; }
 .cat-ok-btn {
   background: var(--ink); border: none; color: var(--kraft-light);
-  font-family: 'Special Elite', monospace; font-size: 11px;
+  font-family: 'Inter', sans-serif; font-size: 11px;
   letter-spacing: 0.1em; padding: 4px 10px; border-radius: 1px; cursor: pointer;
 }
 
@@ -187,7 +180,7 @@ body { background: #0e0a04; font-family: 'Special Elite', monospace; color: var(
 
 .note-list { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
 .m-note-item {
-  font-family: 'Caveat', cursive; font-size: 16px;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px;
   color: var(--ink); line-height: 1.4;
   display: flex; align-items: flex-start; gap: 4px;
 }
@@ -206,21 +199,21 @@ body { background: #0e0a04; font-family: 'Special Elite', monospace; color: var(
 .note-textarea {
   flex: 1; background: transparent; border: none;
   border-bottom: 1px solid rgba(100,70,30,0.35);
-  font-family: 'Caveat', cursive; font-size: 17px;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px;
   color: var(--ink); padding: 4px 0; resize: none; height: 60px; outline: none;
 }
-.note-textarea::placeholder { color: rgba(90,69,48,0.35); font-style: italic; }
+.note-textarea::placeholder { color: rgba(90,69,48,0.35); ; }
 .add-note-btn {
   background: var(--ink); border: none; color: var(--kraft-light);
-  font-family: 'Special Elite', monospace; font-size: 11px;
+  font-family: 'Inter', sans-serif; font-size: 11px;
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 7px 12px; border-radius: 1px; cursor: pointer; flex-shrink: 0;
 }
 .add-note-btn:active { opacity: 0.8; }
 
 .no-cat-hint {
-  font-family: 'Caveat', cursive; font-size: 15px;
-  color: rgba(90,69,48,0.4); font-style: italic; padding: 16px 0; text-align: center;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px;
+  color: rgba(90,69,48,0.4); ; padding: 16px 0; text-align: center;
 }
 </style>
 </head>
@@ -230,45 +223,9 @@ body { background: #0e0a04; font-family: 'Special Elite', monospace; color: var(
 <div id="tv-view">
   <div class="tv-header">
     <div class="tv-title">De Sekte <span>— onopgeloste mysteries —</span></div>
-    <span class="clock" id="clock">11:18</span>
+    <span class="clock" id="clock"></span>
   </div>
-  <div class="grid" id="tv-grid"><div class="card">
-      <div class="card-top">
-        <div class="card-name">Jorien</div>
-        <div class="card-stamp">J.V.</div>
-      </div>
-      <div class="card-body"><div class="tv-empty">nog geen notities...</div></div>
-    </div><div class="card">
-      <div class="card-top">
-        <div class="card-name">Leen</div>
-        <div class="card-stamp">L.</div>
-      </div>
-      <div class="card-body"><div class="tv-empty">nog geen notities...</div></div>
-    </div><div class="card">
-      <div class="card-top">
-        <div class="card-name">Zindzi</div>
-        <div class="card-stamp">Z.</div>
-      </div>
-      <div class="card-body"><div class="tv-empty">nog geen notities...</div></div>
-    </div><div class="card">
-      <div class="card-top">
-        <div class="card-name">Sterre</div>
-        <div class="card-stamp">S.</div>
-      </div>
-      <div class="card-body"><div class="tv-empty">nog geen notities...</div></div>
-    </div><div class="card">
-      <div class="card-top">
-        <div class="card-name">Paula</div>
-        <div class="card-stamp">P.</div>
-      </div>
-      <div class="card-body"><div class="tv-empty">nog geen notities...</div></div>
-    </div><div class="card">
-      <div class="card-top">
-        <div class="card-name">Ros</div>
-        <div class="card-stamp">R.</div>
-      </div>
-      <div class="card-body"><div class="tv-empty">nog geen notities...</div></div>
-    </div></div>
+  <div class="grid" id="tv-grid"></div>
 </div>
 
 <!-- ══ MOBILE VIEW ══ -->
@@ -290,7 +247,8 @@ body { background: #0e0a04; font-family: 'Special Elite', monospace; color: var(
         <button class="tab-btn add-tab" onclick="showNewCatRow()" title="Nieuwe categorie">+</button>
       </div>
       <div id="new-cat-row" style="display:none;flex-direction:row;">
-        <input class="cat-input" id="cat-input" placeholder="naam van categorie..." maxlength="30" onkeydown="if(event.key===&#39;Enter&#39;) addCategory()">
+        <input class="cat-input" id="cat-input" placeholder="naam van categorie..." maxlength="30"
+          onkeydown="if(event.key==='Enter') addCategory()">
         <button class="cat-ok-btn" onclick="addCategory()">ok</button>
       </div>
       <div class="tab-content" id="tab-content"></div>
@@ -455,7 +413,7 @@ function renderTabContent() {
           <span class="m-note-text">${esc(text)}</span>
           <button class="del-btn" data-key="${key}">×</button>
         </div>`).join('')
-    : `<div style="font-family:'Caveat',cursive;font-size:14px;color:rgba(90,69,48,0.35);font-style:italic;padding:4px 0">nog leeg...</div>`;
+    : `<div style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(90,69,48,0.35);font-style:italic;padding:4px 0">nog leeg...</div>`;
 
   content.innerHTML = `
     <div class="note-list" id="note-list">${noteListHtml}</div>
@@ -513,6 +471,5 @@ function esc(s) {
 
 if (isMobile) renderPlayerSelect();
 </script>
-
-
-</body></html>
+</body>
+</html>
