@@ -5,216 +5,214 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>De Sekte — Notities</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --ink: #2a1f0e;
-  --ink-faded: #5a4530;
+  --ink-faded: #6a5540;
   --stamp-red: #8b2020;
   --paper: #d4b878;
-  --paper-dark: #c4a860;
+  --paper-dark: #c0a060;
+  --paper-tab: #c8aa68;
   --kraft-light: #e8d4a8;
+  --bg: #0e0a04;
 }
-body { background: #0e0a04; font-family: 'Inter', sans-serif; color: var(--ink); min-height: 100vh; }
+body { background: var(--bg); font-family: 'Inter', sans-serif; color: var(--ink); min-height: 100vh; }
 
 /* ══ TV VIEW ══ */
 #tv-view {
   width: 100vw; height: 100vh;
   display: flex; flex-direction: column;
-  padding: 16px 20px 14px;
+  padding: 14px 18px 12px;
   background: radial-gradient(ellipse at center, #2a1e0a 0%, #0e0a04 100%);
   overflow: hidden;
 }
 .tv-header {
   display: flex; align-items: baseline; justify-content: space-between;
-  margin-bottom: 12px; flex-shrink: 0;
+  margin-bottom: 10px; flex-shrink: 0;
 }
-.tv-title { font-size: 20px; color: var(--kraft-light); letter-spacing: 0.12em; text-transform: uppercase; }
-.tv-title span { color: var(--stamp-red); font-size: 11px; display: block; letter-spacing: 0.25em; margin-top: 1px; }
-.clock { font-size: 12px; color: #4a3a28; letter-spacing: 0.1em; }
+.tv-title { font-size: 18px; font-weight: 700; color: var(--kraft-light); letter-spacing: 0.1em; text-transform: uppercase; }
+.tv-title span { color: var(--stamp-red); font-size: 10px; font-weight: 500; display: block; letter-spacing: 0.2em; margin-top: 1px; }
+.clock { font-size: 12px; font-weight: 500; color: #4a3a28; letter-spacing: 0.1em; }
 
 .grid {
-  flex: 1; display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 10px; overflow: hidden;
+  gap: 10px;
+  overflow: hidden;
 }
 
+/* ── card ── */
 .card {
   background: var(--paper);
   border-radius: 2px;
-  padding: 10px 12px 8px;
   display: flex; flex-direction: column;
   position: relative; overflow: hidden;
-  box-shadow: 2px 3px 12px rgba(0,0,0,0.6), inset 0 0 40px rgba(0,0,0,0.06);
+  box-shadow: 2px 3px 14px rgba(0,0,0,0.65), inset 0 0 50px rgba(0,0,0,0.06);
 }
 .card::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: repeating-linear-gradient(transparent, transparent 20px, rgba(160,120,60,0.22) 20px, rgba(160,120,60,0.22) 21px);
-  pointer-events: none;
+  content: ''; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(transparent, transparent 22px, rgba(160,120,60,0.2) 22px, rgba(160,120,60,0.2) 23px);
+  pointer-events: none; z-index: 0;
 }
 
-
-.card-top {
+.card-header {
   display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 1px solid rgba(100,70,30,0.35);
-  padding-bottom: 5px; margin-bottom: 6px;
-  flex-shrink: 0; position: relative; z-index: 1;
+  padding: 8px 12px 0;
+  flex-shrink: 0; position: relative; z-index: 2;
 }
-.card-name { font-size: 13px; color: var(--ink); letter-spacing: 0.08em; text-transform: uppercase; }
-.card-stamp {
-  font-size: 8px; color: var(--stamp-red); letter-spacing: 0.12em;
-  border: 1px solid var(--stamp-red); padding: 1px 4px; border-radius: 1px;
-  opacity: 0.55; transform: rotate(2deg);
+.card-title { font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: 0.1em; text-transform: uppercase; }
+.card-stamp { font-size: 8px; font-weight: 700; color: var(--stamp-red); letter-spacing: 0.12em; border: 1px solid var(--stamp-red); padding: 1px 4px; border-radius: 1px; opacity: 0.6; transform: rotate(2deg); }
+
+/* tabs row */
+.tab-row {
+  display: flex; gap: 2px;
+  padding: 6px 10px 0;
+  flex-shrink: 0; position: relative; z-index: 2;
+  border-bottom: 1px solid rgba(100,70,30,0.3);
+}
+.tv-tab {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-faded);
+  padding: 4px 8px;
+  border-radius: 2px 2px 0 0;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-bottom: none;
+  background: transparent;
+  transition: background 0.1s;
+}
+.tv-tab:hover { background: rgba(0,0,0,0.06); }
+.tv-tab.active {
+  background: var(--paper-dark);
+  color: var(--ink);
+  border-color: rgba(100,70,30,0.3);
+  border-bottom: 1px solid var(--paper-dark);
+  margin-bottom: -1px;
 }
 
-/* categories inside card */
-.card-body { flex: 1; overflow: hidden; display: flex; flex-direction: column; gap: 5px; position: relative; z-index: 1; }
+/* notes area */
+.card-body {
+  flex: 1; overflow-y: auto; padding: 8px 12px 8px;
+  position: relative; z-index: 1;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100,70,30,0.3) transparent;
+}
 
-.tv-category { display: flex; flex-direction: column; gap: 1px; }
-.tv-cat-label {
-  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--stamp-red); opacity: 0.75; margin-bottom: 1px;
-  font-family: 'Inter', sans-serif;
+.note-row {
+  display: flex; align-items: flex-start; gap: 4px;
+  padding: 2px 0; animation: appear 0.2s ease;
 }
-.tv-note {
-  font-family: 'Inter', sans-serif; font-weight: 700;
-  font-size: 12px; color: var(--ink); line-height: 1.3;
-  padding-left: 8px;
-}
-.tv-note::before { content: '— '; color: var(--ink-faded); font-size: 10px; }
-.tv-empty { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 11px; color: rgba(90,69,48,0.35); ; }
+@keyframes appear { from { opacity:0; transform: translateY(-3px); } to { opacity:1; transform: translateY(0); } }
+
+.note-arrows { display: flex; flex-direction: column; gap: 0; flex-shrink: 0; opacity: 0.3; }
+.note-arrows:hover { opacity: 0.7; }
+.arr-btn { background: none; border: none; cursor: pointer; font-size: 9px; color: var(--ink); padding: 0; line-height: 1.2; }
+
+.note-text { font-size: 11px; font-weight: 500; color: var(--ink); line-height: 1.4; flex: 1; }
+.note-text::before { content: '— '; color: var(--ink-faded); font-size: 10px; }
+
+.tv-empty { font-size: 11px; color: rgba(90,69,48,0.35); padding: 4px 0; font-style: italic; }
 
 /* ══ MOBILE VIEW ══ */
-#mobile-view { display: none; min-height: 100vh; background: #0e0a04; padding: 28px 16px 50px; }
+#mobile-view { display: none; min-height: 100vh; background: var(--bg); padding: 28px 16px 50px; }
 
-.mobile-header { text-align: center; margin-bottom: 26px; }
-.mobile-title { font-size: 20px; color: var(--kraft-light); letter-spacing: 0.12em; text-transform: uppercase; }
-.mobile-sub { font-size: 10px; color: #4a3a28; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 4px; }
+.mobile-header { text-align: center; margin-bottom: 24px; }
+.mobile-title { font-size: 20px; font-weight: 700; color: var(--kraft-light); letter-spacing: 0.1em; text-transform: uppercase; }
+.mobile-sub { font-size: 10px; font-weight: 500; color: #4a3a28; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 4px; }
 
-.player-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.player-btn {
+/* category select */
+.cat-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cat-btn {
   background: var(--paper); border: none; border-radius: 2px;
-  padding: 16px 10px; cursor: pointer; text-align: center;
+  padding: 18px 12px; cursor: pointer; text-align: center;
   box-shadow: 2px 3px 10px rgba(0,0,0,0.5); position: relative; overflow: hidden;
 }
-.player-btn::before {
+.cat-btn::before {
   content: ''; position: absolute; inset: 0;
   background-image: repeating-linear-gradient(transparent, transparent 20px, rgba(160,120,60,0.2) 20px, rgba(160,120,60,0.2) 21px);
   pointer-events: none;
 }
-.player-btn:active { opacity: 0.8; }
-.btn-name { font-size: 15px; color: var(--ink); letter-spacing: 0.06em; text-transform: uppercase; position: relative; }
+.cat-btn:active { opacity: 0.8; }
+.cat-btn-title { font-size: 14px; font-weight: 700; color: var(--ink); letter-spacing: 0.06em; text-transform: uppercase; position: relative; }
+.cat-btn-sub { font-size: 10px; font-weight: 500; color: var(--ink-faded); margin-top: 3px; position: relative; }
 
-/* ── player sheet ── */
-#player-sheet { display: none; }
+/* sheet */
+#cat-sheet { display: none; }
 .back-btn {
-  background: none; border: none;
-  font-family: 'Inter', sans-serif; font-size: 11px;
+  background: none; border: none; font-size: 11px; font-weight: 700;
   color: #4a3a28; letter-spacing: 0.15em; text-transform: uppercase;
-  cursor: pointer; margin-bottom: 16px; display: block;
+  cursor: pointer; margin-bottom: 14px; display: block;
 }
 
 .sheet-paper {
   background: var(--paper); border-radius: 2px;
-  box-shadow: 2px 3px 14px rgba(0,0,0,0.55);
-  position: relative; overflow: hidden;
+  box-shadow: 2px 3px 14px rgba(0,0,0,0.55); overflow: hidden; position: relative;
 }
 .sheet-paper::before {
   content: ''; position: absolute; inset: 0;
-  background-image: repeating-linear-gradient(transparent, transparent 26px, rgba(160,120,60,0.22) 26px, rgba(160,120,60,0.22) 27px);
-  pointer-events: none;
+  background-image: repeating-linear-gradient(transparent, transparent 26px, rgba(160,120,60,0.2) 26px, rgba(160,120,60,0.2) 27px);
+  pointer-events: none; z-index: 0;
 }
 
+.sheet-header { padding: 14px 14px 0; position: relative; z-index: 1; }
+.sheet-title { font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: 0.08em; text-transform: uppercase; }
 
-.sheet-header {
-  padding: 14px 14px 10px;
+.m-tab-row {
+  display: flex; gap: 2px; padding: 8px 14px 0; overflow-x: auto;
+  position: relative; z-index: 1; scrollbar-width: none;
   border-bottom: 1px solid rgba(100,70,30,0.3);
-  position: relative; z-index: 1;
 }
-.sheet-name { font-size: 17px; color: var(--ink); letter-spacing: 0.08em; text-transform: uppercase; }
+.m-tab-row::-webkit-scrollbar { display: none; }
 
-/* tabs */
-.tabs-row {
-  display: flex; gap: 0; overflow-x: auto;
-  padding: 0 14px; border-bottom: 1px solid rgba(100,70,30,0.3);
-  position: relative; z-index: 1;
-  scrollbar-width: none;
+.m-tab {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-faded); padding: 6px 10px;
+  border-radius: 2px 2px 0 0; cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  border: 1px solid transparent; border-bottom: none; background: transparent;
 }
-.tabs-row::-webkit-scrollbar { display: none; }
-
-.tab-btn {
-  background: none; border: none; border-bottom: 2px solid transparent;
-  font-family: 'Inter', sans-serif; font-size: 11px;
-  color: var(--ink-faded); letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 8px 10px; cursor: pointer; white-space: nowrap; flex-shrink: 0;
-}
-.tab-btn.active { color: var(--stamp-red); border-bottom-color: var(--stamp-red); }
-.tab-btn.add-tab { color: rgba(90,69,48,0.5); font-size: 16px; padding: 6px 10px; letter-spacing: 0; }
-.tab-btn.add-tab:hover { color: var(--ink); }
-
-/* new category input */
-#new-cat-row {
-  display: none; padding: 8px 14px;
-  border-bottom: 1px solid rgba(100,70,30,0.2);
-  position: relative; z-index: 1; gap: 8px; align-items: center;
-}
-.cat-input {
-  flex: 1; background: transparent; border: none;
-  border-bottom: 1px solid rgba(100,70,30,0.4);
-  font-family: 'Inter', sans-serif; font-size: 13px;
-  color: var(--ink); padding: 3px 0; outline: none;
-  letter-spacing: 0.06em;
-}
-.cat-input::placeholder { color: rgba(90,69,48,0.4); ; }
-.cat-ok-btn {
-  background: var(--ink); border: none; color: var(--kraft-light);
-  font-family: 'Inter', sans-serif; font-size: 11px;
-  letter-spacing: 0.1em; padding: 4px 10px; border-radius: 1px; cursor: pointer;
+.m-tab.active {
+  background: var(--paper-dark); color: var(--ink);
+  border-color: rgba(100,70,30,0.3); border-bottom: 1px solid var(--paper-dark);
+  margin-bottom: -1px;
 }
 
-/* notes in active tab */
-.tab-content { padding: 10px 14px 14px; position: relative; z-index: 1; }
+.m-tab-content { padding: 10px 14px 14px; position: relative; z-index: 1; }
 
-.note-list { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
-.m-note-item {
-  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px;
-  color: var(--ink); line-height: 1.4;
-  display: flex; align-items: flex-start; gap: 4px;
+.m-note-row {
+  display: flex; align-items: flex-start; gap: 6px;
+  padding: 5px 0; border-bottom: 1px solid rgba(100,70,30,0.12);
 }
-.m-note-item::before { content: '— '; color: var(--ink-faded); font-size: 13px; flex-shrink: 0; margin-top: 2px; }
-.m-note-text { flex: 1; }
-.del-btn {
-  background: none; border: none; color: rgba(100,60,30,0.3);
-  cursor: pointer; font-size: 18px; padding: 0; line-height: 1; flex-shrink: 0;
-}
-.del-btn:hover { color: var(--stamp-red); }
+.m-note-row:last-child { border-bottom: none; }
 
-.note-input-area {
-  display: flex; gap: 8px; align-items: flex-end;
-  border-top: 1px solid rgba(100,70,30,0.25); padding-top: 10px; margin-top: 6px;
-}
+.m-note-arrows { display: flex; flex-direction: column; gap: 1px; flex-shrink: 0; }
+.m-arr-btn { background: none; border: none; cursor: pointer; font-size: 14px; color: var(--ink-faded); padding: 0; line-height: 1; }
+.m-arr-btn:active { color: var(--ink); }
+
+.m-note-text { font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.4; flex: 1; }
+.m-del-btn { background: none; border: none; color: rgba(100,60,30,0.3); cursor: pointer; font-size: 18px; padding: 0; line-height: 1; flex-shrink: 0; }
+.m-del-btn:hover { color: var(--stamp-red); }
+
+.m-empty { font-size: 13px; color: rgba(90,69,48,0.35); font-style: italic; padding: 6px 0; }
+
+.note-input-area { display: flex; gap: 8px; align-items: flex-end; border-top: 1px solid rgba(100,70,30,0.25); padding-top: 10px; margin-top: 8px; }
 .note-textarea {
   flex: 1; background: transparent; border: none;
   border-bottom: 1px solid rgba(100,70,30,0.35);
-  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px;
-  color: var(--ink); padding: 4px 0; resize: none; height: 60px; outline: none;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500;
+  color: var(--ink); padding: 4px 0; resize: none; height: 56px; outline: none;
 }
-.note-textarea::placeholder { color: rgba(90,69,48,0.35); ; }
+.note-textarea::placeholder { color: rgba(90,69,48,0.35); }
 .add-note-btn {
   background: var(--ink); border: none; color: var(--kraft-light);
-  font-family: 'Inter', sans-serif; font-size: 11px;
+  font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 7px 12px; border-radius: 1px; cursor: pointer; flex-shrink: 0;
 }
 .add-note-btn:active { opacity: 0.8; }
-
-.no-cat-hint {
-  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px;
-  color: rgba(90,69,48,0.4); ; padding: 16px 0; text-align: center;
-}
 </style>
 </head>
 <body>
@@ -232,26 +230,15 @@ body { background: #0e0a04; font-family: 'Inter', sans-serif; color: var(--ink);
 <div id="mobile-view">
   <div class="mobile-header">
     <div class="mobile-title">De Sekte</div>
-    <div class="mobile-sub" id="mobile-sub">kies jouw naam</div>
+    <div class="mobile-sub" id="mobile-sub">kies een categorie</div>
   </div>
-
-  <div class="player-select-grid" id="player-select-grid"></div>
-
-  <div id="player-sheet">
-    <button class="back-btn" onclick="showPlayerSelect()">← terug</button>
+  <div class="cat-select-grid" id="cat-select-grid"></div>
+  <div id="cat-sheet">
+    <button class="back-btn" onclick="showCatSelect()">← terug</button>
     <div class="sheet-paper">
-      <div class="sheet-header">
-        <div class="sheet-name" id="sheet-name"></div>
-      </div>
-      <div class="tabs-row" id="tabs-row">
-        <button class="tab-btn add-tab" onclick="showNewCatRow()" title="Nieuwe categorie">+</button>
-      </div>
-      <div id="new-cat-row" style="display:none;flex-direction:row;">
-        <input class="cat-input" id="cat-input" placeholder="naam van categorie..." maxlength="30"
-          onkeydown="if(event.key==='Enter') addCategory()">
-        <button class="cat-ok-btn" onclick="addCategory()">ok</button>
-      </div>
-      <div class="tab-content" id="tab-content"></div>
+      <div class="sheet-header"><div class="sheet-title" id="sheet-title"></div></div>
+      <div class="m-tab-row" id="m-tab-row"></div>
+      <div class="m-tab-content" id="m-tab-content"></div>
     </div>
   </div>
 </div>
@@ -273,19 +260,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const PLAYERS = [
-  { id: 0, name: "Jorien",  stamp: "J.V." },
-  { id: 1, name: "Leen",    stamp: "L." },
-  { id: 2, name: "Zindzi",  stamp: "Z." },
-  { id: 3, name: "Sterre",  stamp: "S." },
-  { id: 4, name: "Paula",   stamp: "P." },
-  { id: 5, name: "Ros",     stamp: "R." },
+const CATEGORIES = [
+  { id: 'mensen',     label: 'Mensen',     stamp: 'M', tabs: ['Verdachten','Getuigen','Slachtoffers'] },
+  { id: 'feiten',    label: 'Feiten',     stamp: 'F', tabs: ['Tijdlijn','Alibi\'s','Locaties'] },
+  { id: 'materiaal', label: 'Materiaal',  stamp: 'X', tabs: ['Bewijzen','Documenten','Foto\'s','Autopsie'] },
+  { id: 'conclusies',label: 'Conclusies', stamp: 'C', tabs: ['Motieven','Theorieën','Leugens','Vragen'] },
 ];
 
-// data shape: { playerId: { cats: { catKey: { name, order } }, notes: { catKey: { noteKey: text } } } }
+// data shape: { catId: { tabName: [ {text, order} ] } }
 let data = {};
-let activePlayer = null;
-let activeTab = null; // catKey
+let activeCat = null;
+let activeTab = {};  // catId -> tabName
 
 const isMobile = window.innerWidth < 700;
 if (isMobile) {
@@ -293,183 +278,183 @@ if (isMobile) {
   document.getElementById('mobile-view').style.display = 'block';
 }
 
-onValue(ref(db, 'data'), snap => {
+onValue(ref(db, 'v2'), snap => {
   data = snap.val() || {};
   if (!isMobile) renderTV();
-  if (isMobile && activePlayer !== null) {
-    renderTabs();
-    renderTabContent();
-  }
+  if (isMobile && activeCat) { renderMTabs(); renderMContent(); }
 });
+
+// init activeTab
+CATEGORIES.forEach(c => { activeTab[c.id] = c.tabs[0]; });
 
 function updateClock() {
   const el = document.getElementById('clock');
-  if (el) el.textContent = new Date().toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+  if (el) el.textContent = new Date().toLocaleTimeString('nl-NL', { hour:'2-digit', minute:'2-digit' });
 }
 updateClock(); setInterval(updateClock, 15000);
 
-// ══ TV ══
-function renderTV() {
-  const grid = document.getElementById('tv-grid');
-  grid.innerHTML = '';
-  PLAYERS.forEach(p => {
-    const pData = data[p.id] || {};
-    const cats = pData.cats ? Object.entries(pData.cats).sort((a,b) => (a[1].order||0)-(b[1].order||0)) : [];
-    const notes = pData.notes || {};
-
-    const card = document.createElement('div');
-    card.className = 'card';
-
-    let bodyHtml = '';
-    if (cats.length === 0) {
-      bodyHtml = `<div class="tv-empty">nog geen notities...</div>`;
-    } else {
-      cats.forEach(([catKey, cat]) => {
-        const catNotes = notes[catKey] ? Object.values(notes[catKey]) : [];
-        bodyHtml += `<div class="tv-category">
-          <div class="tv-cat-label">${esc(cat.name)}</div>
-          ${catNotes.length ? catNotes.map(n => `<div class="tv-note">${esc(n)}</div>`).join('') : `<div class="tv-note" style="opacity:0.35;font-style:italic">—</div>`}
-        </div>`;
-      });
-    }
-
-    card.innerHTML = `
-      <div class="card-top">
-        <div class="card-name">${esc(p.name)}</div>
-        <div class="card-stamp">${p.stamp}</div>
-      </div>
-      <div class="card-body">${bodyHtml}</div>
-    `;
-    grid.appendChild(card);
-  });
+// ── helpers ──
+function getNotes(catId, tab) {
+  return data[catId] && data[catId][tab]
+    ? Object.entries(data[catId][tab]).sort((a,b) => (a[1].order||0)-(b[1].order||0))
+    : [];
 }
-
-// ══ MOBILE ══
-function renderPlayerSelect() {
-  const grid = document.getElementById('player-select-grid');
-  grid.innerHTML = '';
-  PLAYERS.forEach(p => {
-    const btn = document.createElement('div');
-    btn.className = 'player-btn';
-    btn.innerHTML = `<div class="btn-name">${esc(p.name)}</div>`;
-    btn.onclick = () => openPlayer(p.id);
-    grid.appendChild(btn);
-  });
-}
-
-function openPlayer(id) {
-  activePlayer = id;
-  activeTab = null;
-  const p = PLAYERS[id];
-  document.getElementById('player-select-grid').style.display = 'none';
-  document.getElementById('mobile-sub').textContent = '';
-  document.getElementById('player-sheet').style.display = 'block';
-  document.getElementById('sheet-name').textContent = p.name;
-
-  // pick first tab if exists
-  const cats = getCats();
-  if (cats.length > 0) activeTab = cats[0][0];
-
-  renderTabs();
-  renderTabContent();
-}
-
-function getCats() {
-  const pData = data[activePlayer] || {};
-  return pData.cats ? Object.entries(pData.cats).sort((a,b) => (a[1].order||0)-(b[1].order||0)) : [];
-}
-
-function renderTabs() {
-  const row = document.getElementById('tabs-row');
-  const cats = getCats();
-  row.innerHTML = '';
-  cats.forEach(([key, cat]) => {
-    const btn = document.createElement('button');
-    btn.className = 'tab-btn' + (key === activeTab ? ' active' : '');
-    btn.textContent = cat.name;
-    btn.onclick = () => { activeTab = key; renderTabs(); renderTabContent(); };
-    row.appendChild(btn);
-  });
-  const addBtn = document.createElement('button');
-  addBtn.className = 'tab-btn add-tab';
-  addBtn.textContent = '+';
-  addBtn.title = 'Nieuwe categorie';
-  addBtn.onclick = showNewCatRow;
-  row.appendChild(addBtn);
-}
-
-function renderTabContent() {
-  const content = document.getElementById('tab-content');
-  if (!activeTab) {
-    content.innerHTML = `<div class="no-cat-hint">maak een categorie aan via +</div>`;
-    return;
-  }
-  const pData = data[activePlayer] || {};
-  const catNotes = pData.notes && pData.notes[activeTab] ? Object.entries(pData.notes[activeTab]) : [];
-
-  const noteListHtml = catNotes.length
-    ? catNotes.map(([key, text]) => `
-        <div class="m-note-item">
-          <span class="m-note-text">${esc(text)}</span>
-          <button class="del-btn" data-key="${key}">×</button>
-        </div>`).join('')
-    : `<div style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(90,69,48,0.35);font-style:italic;padding:4px 0">nog leeg...</div>`;
-
-  content.innerHTML = `
-    <div class="note-list" id="note-list">${noteListHtml}</div>
-    <div class="note-input-area">
-      <textarea class="note-textarea" id="note-input" placeholder="schrijf hier..."></textarea>
-      <button class="add-note-btn" onclick="submitNote()">toevoegen</button>
-    </div>
-  `;
-
-  content.querySelectorAll('.del-btn').forEach(btn => {
-    btn.onclick = () => remove(ref(db, `data/${activePlayer}/notes/${activeTab}/${btn.dataset.key}`));
-  });
-
-  const ta = document.getElementById('note-input');
-  if (ta) ta.focus();
-}
-
-window.showNewCatRow = function() {
-  const row = document.getElementById('new-cat-row');
-  row.style.display = 'flex';
-  document.getElementById('cat-input').focus();
-};
-
-window.addCategory = function() {
-  const input = document.getElementById('cat-input');
-  const name = input.value.trim();
-  if (!name || activePlayer === null) return;
-  const cats = getCats();
-  push(ref(db, `data/${activePlayer}/cats`), { name, order: cats.length });
-  input.value = '';
-  document.getElementById('new-cat-row').style.display = 'none';
-};
-
-window.submitNote = function() {
-  const input = document.getElementById('note-input');
-  if (!input) return;
-  const text = input.value.trim();
-  if (!text || activePlayer === null || !activeTab) return;
-  push(ref(db, `data/${activePlayer}/notes/${activeTab}`), text);
-  input.value = '';
-  input.focus();
-};
-
-window.showPlayerSelect = function() {
-  activePlayer = null; activeTab = null;
-  document.getElementById('player-sheet').style.display = 'none';
-  document.getElementById('player-select-grid').style.display = 'grid';
-  document.getElementById('mobile-sub').textContent = 'kies jouw naam';
-  document.getElementById('new-cat-row').style.display = 'none';
-};
 
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-if (isMobile) renderPlayerSelect();
+async function moveNote(catId, tab, key, dir) {
+  const notes = getNotes(catId, tab);
+  const idx = notes.findIndex(([k]) => k === key);
+  const swapIdx = idx + dir;
+  if (swapIdx < 0 || swapIdx >= notes.length) return;
+  const aKey = notes[idx][0], aOrder = notes[idx][1].order ?? idx;
+  const bKey = notes[swapIdx][0], bOrder = notes[swapIdx][1].order ?? swapIdx;
+  await set(ref(db, `v2/${catId}/${tab}/${aKey}/order`), bOrder);
+  await set(ref(db, `v2/${catId}/${tab}/${bKey}/order`), aOrder);
+}
+
+// ══ TV ══
+function renderTV() {
+  const grid = document.getElementById('tv-grid');
+  grid.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const curTab = activeTab[cat.id] || cat.tabs[0];
+    const notes = getNotes(cat.id, curTab);
+
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const tabsHtml = cat.tabs.map(t =>
+      `<div class="tv-tab${t===curTab?' active':''}" data-cat="${cat.id}" data-tab="${t}">${esc(t)}</div>`
+    ).join('');
+
+    const notesHtml = notes.length
+      ? notes.map(([key, n], i) => `
+          <div class="note-row">
+            <div class="note-arrows">
+              <button class="arr-btn" data-cat="${cat.id}" data-tab="${curTab}" data-key="${key}" data-dir="-1">▲</button>
+              <button class="arr-btn" data-cat="${cat.id}" data-tab="${curTab}" data-key="${key}" data-dir="1">▼</button>
+            </div>
+            <div class="note-text">${esc(n.text)}</div>
+          </div>`).join('')
+      : `<div class="tv-empty">nog niets genoteerd...</div>`;
+
+    card.innerHTML = `
+      <div class="card-header">
+        <div class="card-title">${esc(cat.label)}</div>
+        <div class="card-stamp">${cat.stamp}</div>
+      </div>
+      <div class="tab-row">${tabsHtml}</div>
+      <div class="card-body">${notesHtml}</div>
+    `;
+
+    card.querySelectorAll('.tv-tab').forEach(btn => {
+      btn.onclick = () => { activeTab[btn.dataset.cat] = btn.dataset.tab; renderTV(); };
+    });
+    card.querySelectorAll('.arr-btn').forEach(btn => {
+      btn.onclick = () => moveNote(btn.dataset.cat, btn.dataset.tab, btn.dataset.key, parseInt(btn.dataset.dir));
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+// ══ MOBILE ══
+function renderCatSelect() {
+  const grid = document.getElementById('cat-select-grid');
+  grid.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const btn = document.createElement('div');
+    btn.className = 'cat-btn';
+    btn.innerHTML = `
+      <div class="cat-btn-title">${esc(cat.label)}</div>
+      <div class="cat-btn-sub">${cat.tabs.join(' · ')}</div>
+    `;
+    btn.onclick = () => openCat(cat.id);
+    grid.appendChild(btn);
+  });
+}
+
+function openCat(id) {
+  activeCat = id;
+  const cat = CATEGORIES.find(c => c.id === id);
+  document.getElementById('cat-select-grid').style.display = 'none';
+  document.getElementById('mobile-sub').textContent = '';
+  document.getElementById('cat-sheet').style.display = 'block';
+  document.getElementById('sheet-title').textContent = cat.label;
+  renderMTabs();
+  renderMContent();
+}
+
+function renderMTabs() {
+  const cat = CATEGORIES.find(c => c.id === activeCat);
+  const row = document.getElementById('m-tab-row');
+  row.innerHTML = cat.tabs.map(t =>
+    `<div class="m-tab${t===activeTab[activeCat]?' active':''}" data-tab="${t}">${esc(t)}</div>`
+  ).join('');
+  row.querySelectorAll('.m-tab').forEach(btn => {
+    btn.onclick = () => { activeTab[activeCat] = btn.dataset.tab; renderMTabs(); renderMContent(); };
+  });
+}
+
+function renderMContent() {
+  const tab = activeTab[activeCat];
+  const notes = getNotes(activeCat, tab);
+  const content = document.getElementById('m-tab-content');
+
+  const noteListHtml = notes.length
+    ? notes.map(([key, n], i) => `
+        <div class="m-note-row">
+          <div class="m-note-arrows">
+            <button class="m-arr-btn" data-key="${key}" data-dir="-1">↑</button>
+            <button class="m-arr-btn" data-key="${key}" data-dir="1">↓</button>
+          </div>
+          <div class="m-note-text">${esc(n.text)}</div>
+          <button class="m-del-btn" data-key="${key}">×</button>
+        </div>`).join('')
+    : `<div class="m-empty">nog niets genoteerd...</div>`;
+
+  content.innerHTML = `
+    <div id="note-list">${noteListHtml}</div>
+    <div class="note-input-area">
+      <textarea class="note-textarea" id="note-input" placeholder="schrijf hier..."></textarea>
+      <button class="add-note-btn" id="add-btn">toevoegen</button>
+    </div>
+  `;
+
+  content.querySelectorAll('.m-arr-btn').forEach(btn => {
+    btn.onclick = () => moveNote(activeCat, tab, btn.dataset.key, parseInt(btn.dataset.dir));
+  });
+  content.querySelectorAll('.m-del-btn').forEach(btn => {
+    btn.onclick = () => remove(ref(db, `v2/${activeCat}/${tab}/${btn.dataset.key}`));
+  });
+  document.getElementById('add-btn').onclick = submitNote;
+  const ta = document.getElementById('note-input');
+  if (ta) { ta.focus(); ta.onkeydown = e => { if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); submitNote(); } }; }
+}
+
+function submitNote() {
+  const input = document.getElementById('note-input');
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text || !activeCat) return;
+  const tab = activeTab[activeCat];
+  const notes = getNotes(activeCat, tab);
+  push(ref(db, `v2/${activeCat}/${tab}`), { text, order: notes.length });
+  input.value = '';
+  input.focus();
+}
+
+window.showCatSelect = function() {
+  activeCat = null;
+  document.getElementById('cat-sheet').style.display = 'none';
+  document.getElementById('cat-select-grid').style.display = 'grid';
+  document.getElementById('mobile-sub').textContent = 'kies een categorie';
+};
+
+if (isMobile) renderCatSelect();
 </script>
 </body>
 </html>
