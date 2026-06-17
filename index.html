@@ -59,7 +59,7 @@ body { background: var(--bg); font-family: 'Inter', sans-serif; color: var(--ink
   padding: 8px 12px 0; flex-shrink: 0; position: relative; z-index: 2;
 }
 .card-title { font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: 0.1em; text-transform: uppercase; }
-.card-stamp { font-size: 8px; font-weight: 700; color: var(--stamp-red); letter-spacing: 0.12em; border: 1px solid var(--stamp-red); padding: 1px 4px; border-radius: 1px; opacity: 0.6; transform: rotate(2deg); }
+
 
 .tab-row {
   display: flex; gap: 2px; padding: 6px 10px 0;
@@ -73,6 +73,9 @@ body { background: var(--bg); font-family: 'Inter', sans-serif; color: var(--ink
   border: 1px solid transparent; border-bottom: none; background: transparent;
 }
 .tv-tab:hover { background: rgba(0,0,0,0.06); }
+.tv-tab-add { color: rgba(100,70,30,0.4) !important; font-size: 13px !important; padding: 2px 8px !important; }
+.tv-tab-add:hover { color: var(--ink) !important; }
+.m-tab-add { color: rgba(100,70,30,0.4) !important; font-size: 16px !important; padding: 4px 10px !important; }
 .tv-tab.active {
   background: var(--paper-dark); color: var(--ink);
   border-color: rgba(100,70,30,0.3);
@@ -284,7 +287,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const CATEGORIES = [
-  { id: 'mensen',     label: 'Mensen',     stamp: 'M', tabs: ['Verdachten','Getuigen','Slachtoffers'] },
+  { id: 'mensen', tabs: ['Verdachten','Getuigen','Slachtoffers'] },
   { id: 'feiten',    label: 'Feiten',     stamp: 'F', tabs: ['Tijdlijn','Alibi\'s','Locaties'] },
   { id: 'materiaal', label: 'Materiaal',  stamp: 'X', tabs: ['Bewijzen','Documenten','Foto\'s','Autopsie'] },
   { id: 'conclusies',label: 'Conclusies', stamp: 'C', tabs: ['Motieven','Theorieën','Leugens','Vragen'] },
@@ -345,9 +348,10 @@ function renderTV() {
     const card = document.createElement('div');
     card.className = 'card';
 
-    const tabsHtml = cat.tabs.map(t =>
+    const allTabs = [...cat.tabs, ...(data[cat.id]?.__tabs__ ? Object.values(data[cat.id].__tabs__) : [])];
+    const tabsHtml = allTabs.map(t =>
       `<div class="tv-tab${t===curTab?' active':''}" data-cat="${cat.id}" data-tab="${t}">${esc(t)}</div>`
-    ).join('');
+    ).join('') + `<div class="tv-tab tv-tab-add" data-cat="${cat.id}" title="nieuw tabblad">+</div>`;
 
     let bodyHtml = '';
     if (notes.length) {
@@ -370,15 +374,24 @@ function renderTV() {
     card.innerHTML = `
       <div class="card-header">
         <div class="card-title">${esc(cat.label)}</div>
-        <div class="card-stamp">${cat.stamp}</div>
+        
       </div>
       <div class="tab-row">${tabsHtml}</div>
       <div class="card-body">${bodyHtml}</div>
     `;
 
     // tab switching
-    card.querySelectorAll('.tv-tab').forEach(btn => {
+    card.querySelectorAll('.tv-tab:not(.tv-tab-add)').forEach(btn => {
       btn.onclick = () => { activeTab[btn.dataset.cat] = btn.dataset.tab; renderTV(); };
+    });
+    card.querySelectorAll('.tv-tab-add').forEach(btn => {
+      btn.onclick = () => {
+        const name = prompt('Naam nieuw tabblad:');
+        if (!name || !name.trim()) return;
+        push(ref(db, `v2/${btn.dataset.cat}/__tabs__`), name.trim()).then(() => {
+          activeTab[btn.dataset.cat] = name.trim();
+        });
+      };
     });
 
     // delete
@@ -484,11 +497,22 @@ function openCat(id) {
 function renderMTabs() {
   const cat = CATEGORIES.find(c => c.id === activeCat);
   const row = document.getElementById('m-tab-row');
-  row.innerHTML = cat.tabs.map(t =>
+  const allMTabs = [...cat.tabs, ...(data[activeCat]?.__tabs__ ? Object.values(data[activeCat].__tabs__) : [])];
+  row.innerHTML = allMTabs.map(t =>
     `<div class="m-tab${t===activeTab[activeCat]?' active':''}" data-tab="${t}">${esc(t)}</div>`
-  ).join('');
-  row.querySelectorAll('.m-tab').forEach(btn => {
+  ).join('') + `<div class="m-tab m-tab-add">+</div>`;
+  row.querySelectorAll('.m-tab:not(.m-tab-add)').forEach(btn => {
     btn.onclick = () => { activeTab[activeCat] = btn.dataset.tab; renderMTabs(); renderMContent(); };
+  });
+  row.querySelectorAll('.m-tab-add').forEach(btn => {
+    btn.onclick = () => {
+      const name = prompt('Naam nieuw tabblad:');
+      if (!name || !name.trim()) return;
+      push(ref(db, `v2/${activeCat}/__tabs__`), name.trim()).then(() => {
+        activeTab[activeCat] = name.trim();
+        renderMTabs(); renderMContent();
+      });
+    };
   });
 }
 
